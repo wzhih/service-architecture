@@ -1,0 +1,13 @@
+#create by winton wang
+#email: wiwang@foxmail.com
+version: "3.2"
+services:
+  proxy:
+    image: nginx:1.14
+    container_name: proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/error:/usr/share/nginx/html
+      - ./nginx/log:/var/log/nginx
