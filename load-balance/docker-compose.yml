@@ -2,19 +2,19 @@
 #email: wiwang@foxmail.com
 version: "3.2"
 services:
-  load:
-    image: nginx:1.14
-    container_name: load
-    ports:
-      - 8000:80
-    volumes:
-      - ./nginx/conf:/etc/nginx/conf.d
-      - ./nginx/error:/usr/share/nginx/html
-      - ./nginx/log:/var/log/nginx
-  # haproxy:
-  #   image: haproxy:1.9
-  #   container_name: haproxy
+  # load:
+  #   image: nginx:1.14
+  #   container_name: load
   #   ports:
-  #     - 8001:80
+  #     - 8000:80
   #   volumes:
-  #     - ./haproxy/conf:/usr/local/etc/haproxy
+  #     - ./nginx/conf:/etc/nginx/conf.d
+  #     - ./nginx/error:/usr/share/nginx/html
+  #     - ./nginx/log:/var/log/nginx
+  haproxy:
+    image: haproxy:1.9
+    container_name: haproxy
+    ports:
+      - 8001:80
+    volumes:
+      - ./haproxy/conf:/usr/local/etc/haproxy
