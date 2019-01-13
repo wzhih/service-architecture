@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PHP</title>
+    <link rel="stylesheet" href="./static/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            display: table;
+        }
+
+        .container {
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4 text-primary">
+            <?php
+                echo "PHP页面 :)";
+            ?>
+        </h1>
+    </div>
+</body>
+<script src="./static/js/jquery.min.js"></script>
+<script src="./static/js/bootstrap.min.js"></script>
+</html>

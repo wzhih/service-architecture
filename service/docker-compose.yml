@@ -1,0 +1,37 @@
+#create by winton wang
+#email: wiwang@foxmail.com
+version: "3.2"
+services:
+  web:
+    image: nginx:1.14
+    container_name: web
+    ports:
+      - 8010:80
+    depends_on:
+      - php
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./www:/usr/share/nginx/html
+      - ./nginx/log:/var/log/nginx
+  php:
+    image: php:7.2-fpm
+    #如果需要安装扩展，可以构建自己的镜像
+    # build: 
+    #   context: ./php
+    container_name: php
+    ports:
+      - 9000:9000
+    volumes:
+      - ./www:/usr/share/nginx/html
+  # 以下是测试多个应用服务器是否可行
+  # web2:
+  #   image: nginx:1.14
+  #   container_name: web2
+  #   ports:
+  #     - 8011:80
+  #   depends_on:
+  #     - php
+  #   volumes:
+  #     - ./nginx/conf:/etc/nginx/conf.d
+  #     - ./www:/usr/share/nginx/html
+  #     - ./nginx/log:/var/log/nginx
