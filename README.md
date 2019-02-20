@@ -3,11 +3,11 @@
 - [反向代理服务器](proxy-server/proxy-server.md)
 - [负载均衡服务器](load-balance/load-balance.md)
 - 业务处理服务器
-    - 应用服务器
+    - [应用服务器](service/service.md)
     - 消息队列服务器
 - [分布式集群存储服务器](data-storage/data-storage.md)
     - 缓存服务器，redis，cache（session存储等）
-    - 关系型数据库（读写分离，主从）
+    - 关系型数据库（[读写分离，主从](master-slave/master-slave.md)）
     - 文件存储服务器（OSS对象存储服务器）
 
 ##### 端口分配

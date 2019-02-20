@@ -34,7 +34,7 @@ show master status;
 连接mysql
 > mysql -u root -p
 
-进行slave服务器授权(`master_log_file`,`master_log_pos`是刚刚记录的File和Position的值)
+进行slave服务器授权(`master_log_file`,`master_log_pos`是刚刚记录的File和Position的值,其他参数看名字就知道是什么了吧)
 ```sql
 change master to master_host='192.168.1.101', master_user='slave', master_password='666666',master_log_file='mysql-bin.000027',master_log_pos=183;
 ```
