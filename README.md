@@ -21,12 +21,27 @@
 3. 业务处理服务器：`8010`,`8011`......
 4. 存储服务器
     - redis: `6379`
-    - mysql/mariadb：`3306`
+    - mysql/mariadb：`3306`,`3307`,`33070`
     - mongo: `27017`
 
 ##### 架构初想图
 
 ![image](后端架构初想图.png)
+
+##### 其他东西
+
+使用composer docker镜像安装或更新的命令如下：
+```
+docker --rm -it -v $PWD:/app composer install --ignore-platform-reqs --no-scripts
+```
+
+要把docker容器里的某个文件/文件夹复制出来，可以使用以下命令
+
+```
+docker run --name tmp-nginx -d nginx
+docker cp tmp-nginx:/etc/nginx/nginx.conf /host/path/nginx.conf
+docker rm -f tmp-nginx
+```
 
 ##### 一己之见
 
