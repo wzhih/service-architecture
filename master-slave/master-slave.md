@@ -1,12 +1,40 @@
 ### MySql主从服务器
 
+使用GTID进行主从复制
+
+### mysql配置文件里面已经配置好了
+
+- master
+    ```sql
+    ### 主从配置 ###
+    # 不同节点的server-id不一样
+    server-id=1 
+    log-bin=mysql-bin
+    gtid_mode=ON
+    enforce-gtid-consistency=true
+    skip_slave_start
+    ```
+- slave
+    ```sql
+    ### 主从配置 ###
+    # 不同节点的server-id不一样
+    server_id=2
+    gtid_mode=ON
+    enforce-gtid-consistency=true
+    skip_slave_start
+    ```
+
 #### master节点
 
 进入master容器
-> docker exec -it master bash
+```bash
+docker exec -it master bash
+```
 
 连接mysql
-> mysql -u root -p
+```bash
+mysql -u root -p
+```
 
 建立同步账户(用户名：`slave`  密码：`666666` 允许链接IP：`%`)
 授予复制权限
@@ -20,7 +48,7 @@ grant replication slave on *.* to 'slave'@'%';
 flush privileges;
 ```
 
-查看记录File和Position的值
+~~查看记录File和Position的值~~
 ```sql
 show master status;
 ```
@@ -29,20 +57,28 @@ show master status;
 #### slave节点
 
 进入slave容器
-> docker exec -it slave bash
+```bash
+docker exec -it slave bash
+```
 
 连接mysql
-> mysql -u root -p
+```bash
+mysql -u root -p
+```
 
-进行slave服务器授权(`master_log_file`,`master_log_pos`是刚刚记录的File和Position的值,其他参数看名字就知道是什么了吧)
+进行slave服务器授权
 ```sql
-change master to master_host='192.168.1.102', master_user='slave', master_password='666666',master_log_file='mysql-bin.000027',master_log_pos=183;
+CHANGE MASTER TO
+MASTER_HOST = '10.0.75.1',
+MASTER_PORT = 3306,
+MASTER_USER = 'slave',
+MASTER_PASSWORD = '666666',
+MASTER_AUTO_POSITION = 1;
 ```
 
 查看server_id,不同节点id，不能一样
 ```sql
 show variables like 'server_id';
-
 ```
 如果id默认为1，可通过以下命令修改
 ```sql
@@ -58,3 +94,4 @@ start slave;
 show slave status;
 ```
 Slave_IO_Running和Slave_SQL_Running均为Yes，则主从连接正常
+**有时候`Slave_IO_Running`一直是Conecting，slave服务器授权可以试试用root账号，有时候是权限不够**

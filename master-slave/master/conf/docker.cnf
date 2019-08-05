@@ -15,7 +15,6 @@ collation-server=utf8mb4_unicode_ci
 # 不同节点的server-id不一样
 server-id=1 
 log-bin=mysql-bin
-# 要同步的数据库，可多个binlog-do-db
-binlog-do-db=test
-# 忽略同步的数据库
-binlog-ignore-db=mysql
+gtid_mode=ON
+enforce-gtid-consistency=true
+skip_slave_start
