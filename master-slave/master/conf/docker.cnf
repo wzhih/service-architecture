@@ -18,3 +18,8 @@ log-bin=mysql-bin
 gtid_mode=ON
 enforce-gtid-consistency=true
 skip_slave_start
+
+# 要同步的数据库，可多个binlog-do-db
+binlog-do-db=test
+# 忽略同步的数据库
+binlog-ignore-db=mysql 
